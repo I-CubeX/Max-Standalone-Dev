@@ -23,9 +23,14 @@
 # http://infusionsystems.com
 #
 
+#
 # requires ResourceHacker to be installed, see http://angusj.com/resourcehacker/
 # requires ResourceHacker to be added to the Windows PATH, see eg. https://www.architectryan.com/2018/03/17/add-to-the-path-on-windows-10/
-# you may not need the substitutions effectuated by ".gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)"
+#
+# requires RubyZip which can be added to your Ruby installaion by running "gem install rubyzip" in a terminal
+#
+# depending on your Ruby configuration you may not need the substitutions effectuated by ".gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)"
+#
 
 require 'fileutils'
 require 'zip'
