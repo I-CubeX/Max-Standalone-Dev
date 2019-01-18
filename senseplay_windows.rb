@@ -124,12 +124,20 @@ app_path_tmp = File.join(Dir.pwd, appdir_name, 'SensePlay_tmp.exe').gsub(File::S
 if File.exist?(app_path)
   
 	# change app icon
-	result = system("resourcehacker.exe -open #{app_path} -save #{app_path_tmp} -action addskip -res resources/SensePlay.ico -mask ICONGROUP,MAINICON")
+	result = system("resourcehacker.exe -open #{app_path} -save #{app_path_tmp} -action addoverwrite -res resources/SensePlay.ico -mask ICONGROUP,1,1033")
 	if File.exist?(app_path_tmp)
 		File.delete(app_path)
 		File.rename(app_path_tmp, app_path)
 	end
     
+	# edit the version number and copyright notice (visible in the file properties)
+	# modify the Version Info resource in ResourceHacker of a SensePlay.exe file and save this resource as VersionInfo1.res
+	result = system("resourcehacker.exe -open #{app_path} -save #{app_path_tmp} -action addoverwrite -res resources/VersionInfo1.res - mask VERSIONINFO,1,1033")
+	if File.exist?(app_path_tmp)
+		File.delete(app_path)
+		File.rename(app_path_tmp, app_path)
+	end
+
 	# zip the app directory
 	directory_to_zip = appdir_path
 	output_file = File.join(appdir_name, 'zip').gsub(File::SEPARATOR, '.').gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)
